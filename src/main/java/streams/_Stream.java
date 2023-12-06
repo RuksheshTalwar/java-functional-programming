@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntConsumer;
+import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
@@ -37,10 +38,22 @@ public class _Stream {
 //        //This Function simply takes an Integer and prints out the result
 //        IntConsumer println = System.out::println;
 
+        /**
+         * allMatch -> Predicate should have all match for the condition to be true
+         * anyMatch -> Predicate should have any 1 match for the condition to be true
+         * noneMatch -> Predicate should have no match for the condition to be true
+         */
+        Predicate<Person> personPredicate = person -> FEMALE.equals(person.gender);
+        boolean containsOnlyFemales = people.stream()
+                .allMatch(personPredicate);
+        System.out.println("Contains only females ? : " + containsOnlyFemales);
+
         people.stream()
                 .map(person -> person.name)
                 .mapToInt(String::length)
                 .forEach(System.out::println);
+
+
 
         people.stream()
                 .forEach(person ->
